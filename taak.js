@@ -348,6 +348,190 @@ APP.Taak = function (mode) {
         };
     };
 
+// LIST ////
+    var proto_list = {};
+
+    function wrap(array) {
+        return Object.create(proto_list, { _array: { value: array } });
+    }
+
+    function list() {
+        var that;
+        if (arguments.length !== 1) {
+            that = Object.create(proto_list);
+            that._array = slice(arguments);
+        } else {
+            var arg = arguments[0];
+            if (taak.isLikeArray(arg)) {
+                that = wrap(slice(arg));
+            } else {
+                that = Object.create(proto_list);
+                that._array = [ arg ];
+            }
+        }
+        return that;
+    }
+
+    proto_list.size = function () {
+        return this._array.length;
+    };
+
+    proto_list.min = function () {
+        var out = this._array[0];
+        this._array.forEach(function(x) { if (x < out) out = x; });
+        return out;
+    };
+
+    proto_list.max = function () {
+        var out = this._array[0];
+        this._array.forEach(function(x) { if (x > out) out = x; });
+        return out;
+    };
+
+    proto_list.indexOf = function (value, from) {
+		if (typeof from === 'undefined') {
+        	return this._array.indexOf(value);
+		} else {
+			return this._array.indexOf(value, from);
+		}
+    };
+
+    proto_list.lastIndexOf = function (value, from) {
+        if (typeof from === 'undefined') {
+            return this._array.lastIndexOf(value);
+        } else {
+            return this._array.lastIndexOf(value, from);
+        }
+    };
+
+    proto_list.map = function (f) {
+        return wrap(this._array.map(f));
+    };
+
+    proto_list.filter = function (f) {
+        return wrap(this._array.filter(f));
+    };
+
+    proto_list.drop = function (n) {
+        return wrap(this._array.slice(n));
+    };
+
+    /**
+     * Take returns a list of the first n elements.
+     *
+     * @param n
+     *
+     * @example
+     *    list(1,2,3,4,5).take(3) //=> list(1,2,3)
+     *    list(1,2).take(4) //=> list(1,2)
+     */
+    proto_list.take = function (n) {
+        return wrap(this._array.slice(0, n));
+    };
+
+    /**
+     * Fold starts with an initial value of an accumulator and successively
+     * combines it with elements of this list using a binary function.
+     *
+     * list(1,2,3).fold(0, f) //=> f(f(f(0, 1), 2), 3)
+     *
+     * @example
+     *    list(1,2,3,4).fold(1, function(a,b) { return a*b; }) //=> 24
+     */
+    proto_list.fold = function (init, f) {
+        return this._array.reduce(f, init);
+    };
+
+    /**
+     * Returns true if p(x) is true for all x in the list.
+     *
+     * @example
+     *    function even(x) { return x % 2 === 0; }
+     *
+     *    list(2,4,6).all(even);  // true
+     */
+    proto_list.all = function (p) {
+        return this._array.every(p);
+    };
+
+    /**
+     * Returns true if p(x) is true for any x in the list.
+     *
+     * @example
+     *    function even(x) { return x % 2 === 0; }
+     *
+     *    list(1,3,5).all(even);  // false
+     *    list(1,3,6).all(even);  // true
+     */
+    proto_list.any = function (p) {
+        return this._array.some(p);
+    };
+
+    /**
+     * Head returns the first element of the list.
+     *
+     * @example
+     *    list(1,2,3,4).head() //=> 1
+     */
+    proto_list.head = function () {
+        return this._array[0];
+    };
+
+    /**
+     * Get returns the nth element of the list.
+     *
+     * @param n
+     *
+     * @example
+     *    list(1,2,3,4).get(0) //=> 1
+     *    list(1,2,3,4).get(1) //=> 2
+     */
+    proto_list.get = function (n) {
+        return this._array[n];
+    };
+
+    /**
+     * Creates a reversed copy of this list.
+     *
+     * @example
+     *    list(1,2,3,4).reverse() //=> list(4,3,2,1)
+     */
+    proto_list.reverse = function () {
+        return wrap(this._array.reverse());
+    };
+
+    /**
+     * ToArray returns a JavaScript array containing elements of this list.
+     *
+     * @param n
+     *
+     * @example
+     *    list(1,2,3,4).toArray()  //=> [1,2,3,4]
+     */
+    proto_list.toArray = function () {
+        return this._array.slice();
+    };
+
+    /**
+     * Each invoke a function for each element of the list.
+     *
+     * @param f
+     *
+     * @example
+     *    list(1,2,3,4).each(function(n) { console.log(n); })
+     */
+    proto_list.each = function (f) {
+        this._array.forEach(f);
+    };
+
+    proto_list.toString = function () {
+        return "list(" + this._array.join(", ") + ")";
+    };
+
+    // export list
+    taak.list = list;
+
+
 	// PUBLIC ////
 	return taak;
 };

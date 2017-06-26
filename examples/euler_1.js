@@ -18,7 +18,6 @@ var euler_1 = function (limit) {
 }
 
 test('testing ... ', function (t) {
-	found = null;
 	t.deepEqual(233168, euler_1(1000));
 	t.end();
 });
@@ -28,7 +27,7 @@ var euler_1_taak = function (a, b, limit) {
         return function (y) {
             return (y % x) === 0;
         }
-    }
+    };
     var i, total = 0;
     var passable = taak.anyjoin(isMod(a), isMod(b));
     for (i=0; i < limit; i++) {
@@ -41,7 +40,6 @@ var euler_1_taak = function (a, b, limit) {
 };
 
 test('testing functionally  ', function (t) {
-	found = null;
 	t.deepEqual(233168, euler_1_taak(3, 5, 1000));
 	t.end();
 });

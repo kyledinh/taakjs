@@ -18,6 +18,7 @@ Taakjs is a Javascript library to provide features of functional programming, DO
 * invert()
 * eq()
 * const()
+* anyjoin()
 * conjoin()
 * disjoin()
 
