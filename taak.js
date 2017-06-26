@@ -15,7 +15,7 @@ APP.Taak = function (mode) {
 // LOGGER ////
 
 	var LOG_LEVEL = (typeof mode !== 'undefined') ? mode : null;
-    var logger = function () {
+	var logger = function () {
         if (LOG_LEVEL === 'DEBUG' || LOG_LEVEL === 'INFO' ||
             APP.LOG_LEVEL === 'DEBUG' || APP.LOG_LEVEL === 'INFO') {
             var i, msg = "";
@@ -416,110 +416,38 @@ APP.Taak = function (mode) {
         return wrap(this._array.slice(n));
     };
 
-    /**
-     * Take returns a list of the first n elements.
-     *
-     * @param n
-     *
-     * @example
-     *    list(1,2,3,4,5).take(3) //=> list(1,2,3)
-     *    list(1,2).take(4) //=> list(1,2)
-     */
     proto_list.take = function (n) {
         return wrap(this._array.slice(0, n));
     };
 
-    /**
-     * Fold starts with an initial value of an accumulator and successively
-     * combines it with elements of this list using a binary function.
-     *
-     * list(1,2,3).fold(0, f) //=> f(f(f(0, 1), 2), 3)
-     *
-     * @example
-     *    list(1,2,3,4).fold(1, function(a,b) { return a*b; }) //=> 24
-     */
     proto_list.fold = function (init, f) {
         return this._array.reduce(f, init);
     };
 
-    /**
-     * Returns true if p(x) is true for all x in the list.
-     *
-     * @example
-     *    function even(x) { return x % 2 === 0; }
-     *
-     *    list(2,4,6).all(even);  // true
-     */
     proto_list.all = function (p) {
         return this._array.every(p);
     };
 
-    /**
-     * Returns true if p(x) is true for any x in the list.
-     *
-     * @example
-     *    function even(x) { return x % 2 === 0; }
-     *
-     *    list(1,3,5).all(even);  // false
-     *    list(1,3,6).all(even);  // true
-     */
     proto_list.any = function (p) {
         return this._array.some(p);
     };
 
-    /**
-     * Head returns the first element of the list.
-     *
-     * @example
-     *    list(1,2,3,4).head() //=> 1
-     */
     proto_list.head = function () {
         return this._array[0];
     };
 
-    /**
-     * Get returns the nth element of the list.
-     *
-     * @param n
-     *
-     * @example
-     *    list(1,2,3,4).get(0) //=> 1
-     *    list(1,2,3,4).get(1) //=> 2
-     */
     proto_list.get = function (n) {
         return this._array[n];
     };
 
-    /**
-     * Creates a reversed copy of this list.
-     *
-     * @example
-     *    list(1,2,3,4).reverse() //=> list(4,3,2,1)
-     */
     proto_list.reverse = function () {
         return wrap(this._array.reverse());
     };
 
-    /**
-     * ToArray returns a JavaScript array containing elements of this list.
-     *
-     * @param n
-     *
-     * @example
-     *    list(1,2,3,4).toArray()  //=> [1,2,3,4]
-     */
     proto_list.toArray = function () {
         return this._array.slice();
     };
 
-    /**
-     * Each invoke a function for each element of the list.
-     *
-     * @param f
-     *
-     * @example
-     *    list(1,2,3,4).each(function(n) { console.log(n); })
-     */
     proto_list.each = function (f) {
         this._array.forEach(f);
     };

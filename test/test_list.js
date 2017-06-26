@@ -114,3 +114,140 @@ test('testing drop() ', function (t) {
 	t.deepEqual(3, ls.drop(2).min());
 	t.end();
 });
+
+/**
+ * Take returns a list of the first n elements.
+ *
+ * @param n
+ *
+ * @example
+ *    list(1,2,3,4,5).take(3) //=> list(1,2,3)
+ *    list(1,2).take(4) //=> list(1,2)
+ */
+test('testing take() ', function (t) {
+	ls = taak.list(1,2,3,4,5);
+	t.deepEqual(2, ls.take(2).size());
+	t.deepEqual(1, ls.take(3).min());
+	t.deepEqual(4, ls.take(4).max());
+	t.end();
+});
+
+/**
+ * Fold starts with an initial value of an accumulator and successively
+ * combines it with elements of this list using a binary function.
+ *
+ * list(1,2,3).fold(0, f) //=> f(f(f(0, 1), 2), 3)
+ *
+ * @example
+ *    list(1,2,3,4).fold(1, function(a,b) { return a*b; }) //=> 24
+ */
+test('testing fold() ', function (t) {
+	ls = taak.list(1,2,3,4,5);
+	t.deepEqual(15, ls.fold(0, function(a,b) { return a + b; } ));
+	t.deepEqual(120, ls.fold(1, function(a,b) { return a * b; } ));
+	t.end();
+});
+
+/**
+ * Returns true if p(x) is true for all x in the list.
+ *
+ * @example
+ *    function even(x) { return x % 2 === 0; }
+ *
+ *    list(2,4,6).all(even);  // true
+ */
+test('testing all() ', function (t) {
+	function even(x) { return x % 2 === 0; }
+	t.deepEqual(true, taak.list(2,4,6).all(even));
+	t.deepEqual(false, taak.list(2,4,6,7).all(even));
+	t.end();
+});
+
+/**
+ * Returns true if p(x) is true for any x in the list.
+ *
+ * @example
+ *    function even(x) { return x % 2 === 0; }
+ *
+ *    list(1,3,5).any(even);  // false
+ *    list(1,3,6).any(even);  // true
+ */
+test('testing any() ', function (t) {
+	function even(x) { return x % 2 === 0; }
+	t.deepEqual(true, taak.list(1,4,5).any(even));
+	t.deepEqual(false, taak.list(1,5,7).any(even));
+	t.end();
+});
+
+/**
+ * Head returns the first element of the list.
+ *
+ * @example
+ *    list(1,2,3,4).head() //=> 1
+ */
+test('testing head() ', function (t) {
+	t.deepEqual(1, taak.list(1,4,5).head());
+	t.deepEqual(5, taak.list(5,7,3,2).head());
+	t.end();
+});
+
+/**
+ * Get returns the nth element of the list.
+ *
+ * @param n
+ *
+ * @example
+ *    list(1,2,3,4).get(0) //=> 1
+ *    list(1,2,3,4).get(1) //=> 2
+ */
+test('testing get() ', function (t) {
+	t.deepEqual(1, taak.list(1,4,5).get(0));
+	t.deepEqual(4, taak.list(1,4,5).get(1));
+	t.deepEqual(3, taak.list(5,7,3,2).get(2));
+	t.end();
+});
+
+/**
+ * Creates a reversed copy of this list.
+ *
+ * @example
+ *    list(1,2,3,4).reverse() //=> list(4,3,2,1)
+ */
+test('testing reverse() ', function (t) {
+	t.deepEqual(5, taak.list(1,4,5).reverse().get(0));
+	t.deepEqual(3, taak.list(5,7,3,2).reverse().get(1));
+	t.end();
+});
+
+/**
+ * ToArray returns a JavaScript array containing elements of this list.
+ *
+ * @param n
+ *
+ * @example
+ *    list(1,2,3,4).toArray()  //=> [1,2,3,4]
+ */
+test('testing toArray() ', function (t) {
+	t.deepEqual([1,4,5], taak.list(1,4,5).toArray());
+	t.deepEqual([5,7,3,2], taak.list(5,7,3,2).toArray());
+	t.end();
+});
+
+/**
+ * Each invoke a function for each element of the list.
+ *
+ * @param f
+ *
+ * @example
+ *    list(1,2,3,4).each(function(n) { console.log(n); })
+ */
+test('testing each() ', function (t) {
+
+	t.end();
+});
+
+test('testing toString() ', function (t) {
+	t.deepEqual("list(1, 4, 5)", taak.list(1,4,5).toString());
+	t.deepEqual("list(5, 7, 3, 2)", taak.list(5,7,3,2).toString());
+	t.end();
+});
