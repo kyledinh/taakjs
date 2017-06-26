@@ -1,0 +1,14 @@
+{
+  "name": "taakjs",
+  "version": "1.0.0",
+  "description": "Collection of useful utilities ",
+  "main": "taak.js",
+  "scripts": {
+    "test": "tap test"
+  },
+  "author": "Kyle Dinh <kyledinh@gmail.com> (http://kyledinh.com)",
+  "license": "MIT",
+  "devDependencies": {
+	"tap": "^10.0.0"
+  }
+}

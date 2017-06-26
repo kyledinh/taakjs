@@ -1,0 +1,13 @@
+decider/node_modules/
+*node_modules/
+decider/platforms/ios/cordova/console.log
+reactjs/node_modules/
+reactjs/build/
+*/consol*.log
+
+*.log
+
+*.pid
+.DS_Store
+
+foo/
