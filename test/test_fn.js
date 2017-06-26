@@ -34,7 +34,9 @@ var ln, wanted, found;
 
 
 test('testing ... ', function (t) {
-	found = null;
-	t.deepEqual(null, found);
+	var f = taak.fn('x -> x+1');
+	t.deepEqual(2, f(1));
+	t.deepEqual(10, taak.list(1,2,3,4).fold(0,taak.fn('x,y -> x+y')));
+	t.deepEqual(10, taak.list(1,2,3,4).fold(0,taak.fn('x y -> x+y')));
 	t.end();
 });

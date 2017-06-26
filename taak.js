@@ -348,7 +348,6 @@ APP.Taak = function (mode) {
         };
     };
 
-
 // LAMBDA FUNCTIONS ////
     var fncache = {};
 
@@ -528,10 +527,9 @@ APP.Taak = function (mode) {
         return "list(" + this._array.join(", ") + ")";
     };
 
-    // export list
     taak.list = list;
 
-////// STREAM /////////////////////////////////////////////////////////////////
+// STREAM ////
     var proto_stream = { isStream: true };
     var proto_stream_array = Object.create(proto_stream);
     var proto_stream_filter = Object.create(proto_stream);
@@ -550,7 +548,6 @@ APP.Taak = function (mode) {
     var proto_stream_append = Object.create(proto_stream);
     var proto_stream_prefix = Object.create(proto_stream);
     var proto_stream_concat = Object.create(proto_stream);
-
 
     function stream() {
         var that;
@@ -940,32 +937,6 @@ APP.Taak = function (mode) {
             }
         });
     };
-
-/*
-    // TREES
-    taak.tree = function(value, nodes) {
-        var that = Object.create(proto_stream_tree);
-        that.value = value;
-        that.nodes = nodes;
-        return that;
-    };
-
-    proto_stream_tree.map = function (f) {
-        var that = Object.create(proto_stream_tree_map);
-        that.source = this;
-        that.mapFn = f;
-        return that;
-    };
-
-    proto_stream_tree_map.inorder = function () {
-        var that = Object.create(proto_stream_tree_inorder);
-        that.source = this;
-        return that;
-    };
-
-    proto_stream_tree_inorder.each = function (f) {
-    }
-*/
 
     var set_interval, clear_interval;
     if (typeof window === 'undefined') {

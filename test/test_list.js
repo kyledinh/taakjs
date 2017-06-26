@@ -242,7 +242,9 @@ test('testing toArray() ', function (t) {
  *    list(1,2,3,4).each(function(n) { console.log(n); })
  */
 test('testing each() ', function (t) {
-
+	var counter = 0;
+	taak.list(1,22,25,44,55).each(function () { counter += 1; });
+	t.deepEqual(5, counter);
 	t.end();
 });
 
