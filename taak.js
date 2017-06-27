@@ -630,7 +630,10 @@ APP.Taak = function (mode) {
     proto_stream.append = function (item) {
         var that = Object.create(proto_stream_append);
         that.source = this;
+		var n = Object.keys(that.source._array).length;
+		that.source._array[n] = item;
         that.item = item;
+		logger("==== that ", that);
         return that;
     };
 
@@ -850,13 +853,13 @@ APP.Taak = function (mode) {
         });
     };
 
+	/* TODO: review */
     proto_stream_append.each = function (f) {
-        this.source.each(function (x) {
-            if (f(x) === STOP) {
-                return STOP;
-            }
-        });
-        return f(x);
+		var items = this.source._array;
+		Object.keys(items).forEach(function(key) {
+		    logger(key, items[key]);
+			return f(items[key]);
+		});
     };
 
     proto_stream_prefix.each = function (f) {
