@@ -1437,14 +1437,14 @@ APP.Taak = function (mode) {
         } else if (arguments.length === 1) {
             arg = arguments[0];
             if (typeof arg === 'string') {
-                that = Object.create(dom_find);
+                that = Object.create(proto_dom_find);
                 that.source = ROOT;
                 that.selector = arg;
             } else if (arg instanceof Node) {
-                that = Object.create(dom_node);
+                that = Object.create(proto_dom_node);
                 that.node = arg;
             } else if (arg instanceof NodeList) {
-                that = Object.create(dom_seq);
+                that = Object.create(proto_dom_seq);
                 that.nodes = slice(arg);
             } else {
                 throw "Bad argument to taak.dom().";
@@ -1454,14 +1454,14 @@ APP.Taak = function (mode) {
     }
 
     dom.id = function (id) {
-        var that = Object.create(dom_id);
+        var that = Object.create(proto_dom_id);
         that.source = ROOT;
         that.id = id;
         return that;
     };
 
     proto_dom.id = function (id) {
-        var that = Object.create(dom_id);
+        var that = Object.create(proto_dom_id);
         that.source = this;
         that.id = id;
         return that;
@@ -1476,14 +1476,14 @@ APP.Taak = function (mode) {
     };
 
     dom.tag = function (name) {
-        var that = Object.create(dom_tag);
+        var that = Object.create(proto_dom_tag);
         that.source = ROOT;
         that.name = name;
         return that;
     };
 
     proto_dom.tag = function (name) {
-        var that = Object.create(dom_tag);
+        var that = Object.create(proto_dom_tag);
         that.source = this;
         that.name = name;
     };
