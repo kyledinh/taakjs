@@ -107,7 +107,7 @@ test('testing curry() ', function (t) {
 	wanted = 6;
 	found = g(1)(2)(3); //=> 6
 	t.deepEqual(wanted, found);
-	g(1)(2,3); //=> 6
+	found = g(1)(2,3); //=> 6
 	t.deepEqual(wanted, found);
 	t.end();
 });
